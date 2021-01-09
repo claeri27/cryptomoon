@@ -1,12 +1,12 @@
-import '@/styles/globals.css'
-import React, { ReactElement } from 'react'
-import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import React, { FC } from 'react'
+import { ChakraProvider, CSSReset } from '@chakra-ui/react'
 import { QueryClientProvider, QueryClient } from 'react-query'
+import type { AppProps } from 'next/app'
 
-const MyApp = ({ Component, pageProps }: AppProps): ReactElement => (
+const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
   <QueryClientProvider client={new QueryClient()}>
     <ChakraProvider>
+      <CSSReset />
       <Component {...pageProps} />
     </ChakraProvider>
   </QueryClientProvider>
