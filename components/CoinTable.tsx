@@ -18,7 +18,7 @@ const Loading = () => (
   </>
 )
 
-export default function CoinTable() {
+const CoinTable = () => {
   const [coinData] = useAtom(coinDataAtom)
   const [coinPrice] = useAtom(coinPriceAtom)
   const [, setCoinIds] = useAtom(coinIdsAtom)
@@ -72,3 +72,5 @@ export default function CoinTable() {
     </>
   )
 }
+
+export default CoinTable

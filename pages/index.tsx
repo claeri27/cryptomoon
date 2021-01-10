@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
-import { Box, Flex, Heading, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
-import { Search2Icon } from '@chakra-ui/icons'
+import { Box } from '@chakra-ui/react'
 import CoinTable from '@/components/CoinTable'
 import axios from 'axios'
 import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import { useAtom } from 'jotai'
+import AppBar from '@/components/AppBar'
 
 export default function Home() {
   const [coinIds] = useAtom(coinIdsAtom)
@@ -43,19 +43,7 @@ export default function Home() {
         <title>Cryptomoon</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex align="center" h="20" w="100%" bg="blue.300" justify="space-between">
-        <Heading size="2xl" ml="4">
-          CRYPTOMOON
-        </Heading>
-        <Box>
-          <InputGroup>
-            <InputLeftElement>
-              <Search2Icon color="white" />
-            </InputLeftElement>
-            <Input w="xs" mr="4" />
-          </InputGroup>
-        </Box>
-      </Flex>
+      <AppBar />
       <CoinTable />
     </Box>
   )
