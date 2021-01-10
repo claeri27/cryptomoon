@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import Head from 'next/head'
 import { Box } from '@chakra-ui/react'
 import CoinTable from '@/components/CoinTable'
@@ -7,7 +7,7 @@ import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import { useAtom } from 'jotai'
 import AppBar from '@/components/AppBar'
 
-const Home = () => {
+const Home: FC = () => {
   const [coinIds] = useAtom(coinIdsAtom)
   const [coinData, setCoinData] = useAtom(coinDataAtom)
   const [, setCoinPrice] = useAtom(coinPriceAtom)
@@ -15,7 +15,7 @@ const Home = () => {
   // Gets initial data from backend and updates state
   useEffect(() => {
     const getAssets = async () => {
-      const res = await axios('http://localhost:3000/api/coinData')
+      const res = await axios('http://localhost:3000/api/coins')
       setCoinData(res.data)
     }
     getAssets()

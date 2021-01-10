@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { NextApiRequest as Req, NextApiResponse as Res } from 'next'
+import axios from 'axios'
 import cors from 'cors'
 import initMiddleware from '@/lib/initMiddleware'
-import axios from 'axios'
+import type { NextApiRequest as Req, NextApiResponse as Res } from 'next'
 
 const useCors = initMiddleware(cors({ methods: ['GET', 'POST', 'OPTIONS'] }))
 

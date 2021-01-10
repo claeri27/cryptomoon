@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useAtom } from 'jotai'
 import { Skeleton, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
@@ -18,7 +18,7 @@ const Loading = () => (
   </>
 )
 
-const CoinTable = () => {
+const CoinTable: FC = () => {
   const [coinData] = useAtom(coinDataAtom)
   const [coinPrice] = useAtom(coinPriceAtom)
   const [, setCoinIds] = useAtom(coinIdsAtom)
