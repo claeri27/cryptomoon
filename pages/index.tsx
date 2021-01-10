@@ -7,7 +7,7 @@ import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import { useAtom } from 'jotai'
 import AppBar from '@/components/AppBar'
 
-export default function Home() {
+const Home = () => {
   const [coinIds] = useAtom(coinIdsAtom)
   const [coinData, setCoinData] = useAtom(coinDataAtom)
   const [, setCoinPrice] = useAtom(coinPriceAtom)
@@ -48,3 +48,5 @@ export default function Home() {
     </Box>
   )
 }
+
+export default Home
