@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Box, Heading, Flex, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+import { Box, Flex, Heading, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
 import CoinTable from '@/components/CoinTable'
 

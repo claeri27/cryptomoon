@@ -7,6 +7,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "prettier",
     "prettier/react",
@@ -30,7 +31,12 @@
     "prettier"
   ],
   "rules": {
-    "react/prop-types": [0],
-    "no-unused-vars": 1
+    "react/prop-types": 0,
+    "no-unused-vars": 1,
+    "react/jsx-uses-react": 0,
+    "react/react-in-jsx-scope": 0,
+    "sort-imports": [1, { "ignoreDeclarationSort": true }],
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-var-requires": 0
   }
 }

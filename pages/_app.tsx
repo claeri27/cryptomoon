@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
-import { ChakraProvider, CSSReset } from '@chakra-ui/react'
-import { QueryClientProvider, QueryClient } from 'react-query'
+import { CSSReset, ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
+import { Provider } from 'jotai'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
-  <QueryClientProvider client={new QueryClient()}>
+  <Provider>
     <ChakraProvider>
       <CSSReset />
       <Component {...pageProps} />
     </ChakraProvider>
-  </QueryClientProvider>
+  </Provider>
 )
 
 export default MyApp

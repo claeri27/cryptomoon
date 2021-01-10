@@ -1,5 +1,6 @@
 module.exports = {
   env: {
-    API_KEY: process.env.API_KEY,
+    ASSETS_API: process.env.ASSETS_API,
+    ASSETS_WS: process.env.ASSETS_WS,
   },
 }
