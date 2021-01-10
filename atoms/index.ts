@@ -16,4 +16,5 @@ interface Data {
 
 export const coinPriceAtom = atom<{ [x: string]: string }>({})
 export const coinDataAtom = atom<Data[]>([])
+export const coinIdsAtom = atom([])
 export const apiAtom = atom(process.env.ASSETS_API)
