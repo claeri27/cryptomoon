@@ -15,8 +15,8 @@ const Home: FC = () => {
   // Gets initial data from backend and updates state
   useEffect(() => {
     const getAssets = async () => {
-      const res = await axios('http://localhost:3000/api/coins')
-      setCoinData(res.data)
+      const res = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
+      setCoinData(res.data.data)
     }
     getAssets()
     const interval = setInterval(() => getAssets(), 10000)
@@ -33,7 +33,7 @@ const Home: FC = () => {
   // Sets up websocket
   useEffect(() => {
     if (coinIds[0]) {
-      const socket = new WebSocket(`wss://ws.coincap.io/prices?assets=${coinIds.map(id => id)}`)
+      const socket = new WebSocket(process.env.NEXT_PUBLIC_ASSETS_WS + coinIds.map(id => id))
       socket.onerror = err => console.log(err)
       socket.onmessage = msg => setCoinPrice(prev => ({ ...prev, ...JSON.parse(msg.data) }))
     }
