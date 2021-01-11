@@ -1,10 +1,10 @@
 import { FC, useEffect } from 'react'
+import axios from 'axios'
 import Head from 'next/head'
 import { Box } from '@chakra-ui/react'
-import CoinTable from '@/components/CoinTable'
-import axios from 'axios'
-import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import { useAtom } from 'jotai'
+import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
+import CoinTable from '@/components/CoinTable'
 import AppBar from '@/components/AppBar'
 
 const Home: FC = () => {
@@ -19,6 +19,8 @@ const Home: FC = () => {
       setCoinData(res.data)
     }
     getAssets()
+    const interval = setInterval(() => getAssets(), 10000)
+    return () => clearInterval(interval)
   }, [setCoinData])
 
   // Sets initial price data before websocket takes over

@@ -48,7 +48,9 @@ const CoinTable: FC = () => {
         <Td>{coin.name + ` (${coin.symbol})`}</Td>
         <Td isNumeric>{formatNum(coin.volumeUsd24Hr, 0)}</Td>
         <Td isNumeric>{formatNum(coin.marketCapUsd, 0)}</Td>
-        <Td isNumeric>{formatNum(coin.changePercent24Hr, 2, 2)}</Td>
+        <Td textColor={Number(coin.changePercent24Hr) > 0 ? 'green.500' : 'red.500'} isNumeric>
+          {formatNum(coin.changePercent24Hr, 2, 2)}
+        </Td>
         <Td isNumeric>{formatNum(coinPrice[coin.id], 2, 2)}</Td>
       </Tr>
     ))
@@ -56,7 +58,7 @@ const CoinTable: FC = () => {
 
   return (
     <>
-      <Table variant="simple" size="lg">
+      <Table variant="unstyled" size="lg">
         <Thead>
           <Tr>
             <Th>#</Th>

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { CSSReset, ChakraProvider } from '@chakra-ui/react'
-import type { AppProps } from 'next/app'
 import { Provider } from 'jotai'
+import type { AppProps } from 'next/app'
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }) => (
   <Provider>
