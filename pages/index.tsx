@@ -7,21 +7,14 @@ import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import CoinTable from '@/components/CoinTable'
 import AppBar from '@/components/AppBar'
 
-const Home: FC = () => {
+const Home: FC = ({ data }: any) => {
   const [coinIds] = useAtom(coinIdsAtom)
   const [coinData, setCoinData] = useAtom(coinDataAtom)
   const [, setCoinPrice] = useAtom(coinPriceAtom)
 
-  // Gets initial data from backend and updates state
   useEffect(() => {
-    const getAssets = async () => {
-      const res = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
-      setCoinData(res.data.data)
-    }
-    getAssets()
-    const interval = setInterval(() => getAssets(), 10000)
-    return () => clearInterval(interval)
-  }, [setCoinData])
+    setCoinData(data)
+  }, [setCoinData, data])
 
   // Sets initial price data before websocket takes over
   useEffect(() => {
@@ -49,6 +42,11 @@ const Home: FC = () => {
       <CoinTable />
     </Box>
   )
+}
+
+export const getStaticProps = async () => {
+  const res = await axios(process.env.NEXT_PUBLIC_BACKEND_URL)
+  return { props: { data: res.data } }
 }
 
 export default Home
