@@ -45,7 +45,7 @@ const Home: FC = ({ data }: any) => {
 }
 
 export const getStaticProps = async () => {
-  const res = await axios(process.env.NEXT_PUBLIC_BACKEND_URL)
+  const res = await axios(process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins')
   return { props: { data: res.data } }
 }
 
