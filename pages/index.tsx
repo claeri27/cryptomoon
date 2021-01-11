@@ -13,6 +13,12 @@ const Home: FC = ({ data }: any) => {
   const [, setCoinPrice] = useAtom(coinPriceAtom)
 
   useEffect(() => {
+    const interval = setInterval(() => console.log(process.env.NEXT_PUBLIC_VERCEL_URL), 2000)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    console.log(data)
     setCoinData(data)
   }, [setCoinData, data])
 
