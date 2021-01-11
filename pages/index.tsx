@@ -7,7 +7,7 @@ import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import CoinTable from '@/components/CoinTable'
 import AppBar from '@/components/AppBar'
 
-const Home: FC = ({ data }: any) => {
+const Home: FC = props => {
   const [coinIds] = useAtom(coinIdsAtom)
   const [coinData, setCoinData] = useAtom(coinDataAtom)
   const [, setCoinPrice] = useAtom(coinPriceAtom)
@@ -33,7 +33,7 @@ const Home: FC = ({ data }: any) => {
   }, [coinIds, setCoinPrice])
 
   const onClick = () => {
-    console.log(data)
+    console.log(props)
   }
 
   return (
