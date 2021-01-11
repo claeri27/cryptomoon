@@ -13,12 +13,6 @@ const Home: FC = ({ data }: any) => {
   const [, setCoinPrice] = useAtom(coinPriceAtom)
 
   useEffect(() => {
-    const interval = setInterval(() => console.log(process.env.NEXT_PUBLIC_VERCEL_URL), 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  useEffect(() => {
-    console.log(data)
     setCoinData(data)
   }, [setCoinData, data])
 
@@ -51,7 +45,11 @@ const Home: FC = ({ data }: any) => {
 }
 
 export const getStaticProps = async () => {
-  const res = await axios('https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins')
+  const res = await axios(
+    process.env.NODE_ENV === 'production'
+      ? process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins'
+      : 'http://localhost:3000/api/coins',
+  )
   return { props: { data: res.data } }
 }
 
