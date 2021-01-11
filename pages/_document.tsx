@@ -9,7 +9,9 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <meta name="Cryptomoon" content="Realtime cryptocurrency price tracking" />
+        </Head>
         <body>
           <Main />
           <NextScript />

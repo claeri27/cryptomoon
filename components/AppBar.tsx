@@ -1,5 +1,13 @@
 import { FC } from 'react'
-import { Box, Flex, Heading, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  FormControl,
+  Heading,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from '@chakra-ui/react'
 import { Search2Icon } from '@chakra-ui/icons'
 
 const AppBar: FC = () => (
@@ -8,12 +16,14 @@ const AppBar: FC = () => (
       CRYPTOMOON
     </Heading>
     <Box>
-      <InputGroup>
-        <InputLeftElement>
-          <Search2Icon color="white" />
-        </InputLeftElement>
-        <Input w="xs" mr="4" />
-      </InputGroup>
+      <FormControl id="search">
+        <InputGroup>
+          <InputLeftElement>
+            <Search2Icon color="white" />
+          </InputLeftElement>
+          <Input w="xs" mr="4" />
+        </InputGroup>
+      </FormControl>
     </Box>
   </Flex>
 )
