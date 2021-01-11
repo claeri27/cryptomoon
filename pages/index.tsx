@@ -47,7 +47,7 @@ const Home: FC = ({ data }: any) => {
 export const getStaticProps = async () => {
   const res = await axios(
     process.env.NODE_ENV === 'production'
-      ? 'http://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins'
+      ? 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins'
       : 'http://localhost:3000/api/coins',
   )
   return { props: { data: res.data } }
