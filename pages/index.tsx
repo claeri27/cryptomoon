@@ -1,7 +1,7 @@
-import { FC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import axios from 'axios'
 import Head from 'next/head'
-import { Box } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
 import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
 import CoinTable from '@/components/CoinTable'
@@ -12,9 +12,9 @@ const Home: FC = ({ data }: any) => {
   const [coinData, setCoinData] = useAtom(coinDataAtom)
   const [, setCoinPrice] = useAtom(coinPriceAtom)
 
-  useEffect(() => {
-    setCoinData(data)
-  }, [setCoinData, data])
+  // useEffect(() => {
+  //   setCoinData(data)
+  // }, [setCoinData, data])
 
   // Sets initial price data before websocket takes over
   useEffect(() => {
@@ -32,6 +32,10 @@ const Home: FC = ({ data }: any) => {
     }
   }, [coinIds, setCoinPrice])
 
+  const onClick = () => {
+    console.log(data)
+  }
+
   return (
     <Box>
       <Head>
@@ -39,6 +43,7 @@ const Home: FC = ({ data }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppBar />
+      <Button onClick={onClick}>BUTTON</Button>
       <CoinTable />
     </Box>
   )
