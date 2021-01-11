@@ -25,12 +25,13 @@ const CoinTable: FC = () => {
 
   const [loading, setLoading] = useState(true)
 
-  const formatNum = (numString: string, max = 2, min?: number) => {
+  const formatNum = (numString: string, max = 2, min?: number, percent = false) => {
     const newNum = Number(numString).toLocaleString(undefined, {
       maximumFractionDigits: max,
       minimumFractionDigits: min,
     })
-    return '$' + newNum
+    if (percent) return newNum + '%'
+    else return '$' + newNum
   }
 
   // Handles loading state
@@ -49,7 +50,7 @@ const CoinTable: FC = () => {
         <Td isNumeric>{formatNum(coin.volumeUsd24Hr, 0)}</Td>
         <Td isNumeric>{formatNum(coin.marketCapUsd, 0)}</Td>
         <Td textColor={Number(coin.changePercent24Hr) > 0 ? 'green.500' : 'red.500'} isNumeric>
-          {formatNum(coin.changePercent24Hr, 2, 2)}
+          {formatNum(coin.changePercent24Hr, 2, 2, true)}
         </Td>
         <Td isNumeric>{formatNum(coinPrice[coin.id], 2, 2)}</Td>
       </Tr>
