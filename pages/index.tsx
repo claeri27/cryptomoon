@@ -50,20 +50,8 @@ const Home: FC = props => {
 }
 
 export const getStaticProps = async () => {
-  // const res = await axios(
-  //   process.env.NODE_ENV === 'production'
-  //     ? 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins'
-  //     : 'http://localhost:3000/api/coins',
-  // )
-  if (process.env.NODE_ENV === 'production') {
-    const res = await fetch('https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins')
-    const data = await res.json()
-    return { props: { data } }
-  } else {
-    const res = await fetch('http://localhost:3000/api/coins')
-    const data = await res.json()
-    return { props: { data: data.data } }
-  }
+  const res = await axios('https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/api/coins')
+  return { props: { data: res.data } }
 }
 
 export default Home
