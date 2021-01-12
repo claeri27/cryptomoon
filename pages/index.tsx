@@ -22,14 +22,10 @@ const Home: FC<Props> = ({ data }) => {
 
   // Sets up websocket
   useEffect(() => {
-    const onMessage = (msg: MessageEvent<any>) => {
-      setCoinPrice(prev => ({ ...prev, ...JSON.parse(msg.data) }))
-    }
-
     if (coinIds[0]) {
       const socket = new WebSocket(process.env.NEXT_PUBLIC_ASSETS_WS + coinIds.map(id => id))
       socket.onerror = err => console.log(err)
-      socket.onmessage = msg => onMessage(msg)
+      socket.onmessage = msg => setCoinPrice(prev => ({ ...prev, ...JSON.parse(msg.data) }))
     }
   }, [coinIds, setCoinPrice])
 
