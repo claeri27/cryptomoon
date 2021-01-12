@@ -1,34 +1,24 @@
 import { FC, useEffect } from 'react'
-import axios from 'axios'
 import Head from 'next/head'
 import { Box } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
-import { coinDataAtom, coinIdsAtom, coinPriceAtom } from '@/atoms'
+import { coinIdsAtom, coinPriceAtom } from '@/atoms'
 import CoinTable from '@/components/CoinTable'
 import AppBar from '@/components/AppBar'
+import axios from 'axios'
+import type { Props } from '@/types'
+import { GetStaticProps } from 'next'
 
-const Home: FC = () => {
+const Home: FC<Props> = ({ data }) => {
   const [coinIds] = useAtom(coinIdsAtom)
-  const [coinData, setCoinData] = useAtom(coinDataAtom)
   const [, setCoinPrice] = useAtom(coinPriceAtom)
-
-  // Gets initial data from backend and updates state
-  useEffect(() => {
-    const getAssets = async () => {
-      const res = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
-      setCoinData(res.data.data)
-    }
-    getAssets()
-    const interval = setInterval(() => getAssets(), 10000)
-    return () => clearInterval(interval)
-  }, [setCoinData])
 
   // Sets initial price data before websocket takes over
   useEffect(() => {
     const prices = {}
-    coinData.forEach(coin => (prices[coin.id] = coin.priceUsd))
+    data.forEach(coin => (prices[coin.id] = coin.priceUsd))
     setCoinPrice(prices)
-  }, [coinData, setCoinPrice])
+  }, [data, setCoinPrice])
 
   // Sets up websocket
   useEffect(() => {
@@ -46,9 +36,14 @@ const Home: FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppBar />
-      <CoinTable />
+      <CoinTable data={data} />
     </Box>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
+  return { props: { data: res.data.data } }
 }
 
 export default Home
