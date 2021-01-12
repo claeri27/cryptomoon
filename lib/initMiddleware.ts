@@ -5,7 +5,7 @@ export default function initMiddleware(middleware) {
     new Promise((resolve, reject) => {
       middleware(req, res, result => {
         if (result instanceof Error) {
-          return reject(result)
+          reject(result)
         }
         return resolve(result)
       })

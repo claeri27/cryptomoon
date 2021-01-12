@@ -1,13 +1,13 @@
 import { FC, useEffect } from 'react'
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
+import axios, { AxiosResponse } from 'axios'
 import { Box } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
 import { coinIdsAtom, coinPriceAtom } from '@/atoms'
 import CoinTable from '@/components/CoinTable'
 import AppBar from '@/components/AppBar'
-import axios from 'axios'
 import type { Props } from '@/types'
-import { GetStaticProps } from 'next'
 
 const Home: FC<Props> = ({ data }) => {
   const [coinIds] = useAtom(coinIdsAtom)
@@ -22,10 +22,14 @@ const Home: FC<Props> = ({ data }) => {
 
   // Sets up websocket
   useEffect(() => {
+    const onMessage = (msg: MessageEvent<any>) => {
+      setCoinPrice(prev => ({ ...prev, ...JSON.parse(msg.data) }))
+    }
+
     if (coinIds[0]) {
       const socket = new WebSocket(process.env.NEXT_PUBLIC_ASSETS_WS + coinIds.map(id => id))
       socket.onerror = err => console.log(err)
-      socket.onmessage = msg => setCoinPrice(prev => ({ ...prev, ...JSON.parse(msg.data) }))
+      socket.onmessage = msg => onMessage(msg)
     }
   }, [coinIds, setCoinPrice])
 
@@ -42,7 +46,7 @@ const Home: FC<Props> = ({ data }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
+  const res: AxiosResponse<Props> = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
   return { props: { data: res.data.data } }
 }
 
