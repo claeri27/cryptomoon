@@ -19,7 +19,9 @@ const Home: FC<Props> = ({ data }) => (
 )
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res: AxiosResponse<Props> = await axios(process.env.NEXT_PUBLIC_ASSETS_API)
+  const res: AxiosResponse<Props> = await axios(
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc',
+  )
   return { props: { data: res.data }, revalidate: 2 }
 }
 
