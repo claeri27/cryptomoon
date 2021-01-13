@@ -16,10 +16,6 @@ import { formatNum } from '@/lib/formatNum'
 const AccordionDetails = dynamic(() => import('@/components/AccordionDetails'))
 
 const CoinTable: FC<Props> = ({ data }) => {
-  const getSrc = (name: string): string => {
-    return `/vector-icons/${name.replace(' ', '-').toLowerCase()}.svg`
-  }
-
   return (
     <Accordion variant="striped" allowMultiple>
       {data.map((coin, idx) => (
@@ -30,7 +26,7 @@ const CoinTable: FC<Props> = ({ data }) => {
             </Text>
             <Box d="flex" w="22rem" alignItems="center">
               <Img
-                src={getSrc(coin.name)}
+                src={coin.image}
                 h={10}
                 w={10}
                 mr={5}
@@ -38,7 +34,7 @@ const CoinTable: FC<Props> = ({ data }) => {
                 fallback={<Spinner h={10} w={10} mr={5} />}
               />
               <Text fontSize="xl" align="left">
-                {coin.name + ` (${coin.symbol})`}
+                {coin.name + ` (${coin.symbol.toUpperCase()})`}
               </Text>
             </Box>
             <Text fontSize="xl" align="right" w="12rem">
