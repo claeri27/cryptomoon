@@ -29,6 +29,9 @@ export interface Data {
   atl_date: string
   roi: null
   last_updated: string
+  sparkline_in_7d: {
+    price: string[]
+  }
 }
 
 export interface Props {
