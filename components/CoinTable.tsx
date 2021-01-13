@@ -6,7 +6,8 @@ import {
   AccordionButton,
   AccordionItem,
   Box,
-  Image,
+  Img,
+  Spinner,
   StatArrow,
   Text,
 } from '@chakra-ui/react'
@@ -48,7 +49,14 @@ const CoinTable: FC<Props> = ({ data }) => {
               {coin.rank}
             </Text>
             <Box d="flex" w="22rem" alignItems="center">
-              <Image src={src} h={10} w={10} mr={5} alt="missing" />
+              <Img
+                src={src}
+                h={10}
+                w={10}
+                mr={5}
+                alt="icon"
+                fallback={<Spinner h={10} w={10} mr={5} />}
+              />
               <Text fontSize="xl" align="left">
                 {coin.name + ` (${coin.symbol})`}
               </Text>
@@ -86,7 +94,11 @@ const CoinTable: FC<Props> = ({ data }) => {
     })
   }
 
-  return <Accordion allowMultiple>{CoinData()}</Accordion>
+  return (
+    <Accordion variant="striped" allowMultiple>
+      {CoinData()}
+    </Accordion>
+  )
 }
 
 export default CoinTable
