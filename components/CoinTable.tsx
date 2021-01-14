@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import dynamic from 'next/dynamic'
 import {
   Accordion,
@@ -111,7 +111,10 @@ const CoinTable: FC<Props> = ({ data }) => {
             </Box>
             <Box w={250}>
               <Sparklines data={coin.sparkline_in_7d.price}>
-                <SparklinesLine color="blue" />
+                <SparklinesLine
+                  color={coin.price_change_percentage_7d_in_currency >= 0 ? 'green' : 'red'}
+                  style={{ fill: 'none' }}
+                />
               </Sparklines>
             </Box>
           </AccordionButton>
