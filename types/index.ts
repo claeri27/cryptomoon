@@ -30,7 +30,7 @@ export interface Data {
   roi: null
   last_updated: string
   sparkline_in_7d: {
-    price: string[]
+    price: number[]
   }
 }
 

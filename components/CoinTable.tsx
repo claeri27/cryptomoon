@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import dynamic from 'next/dynamic'
 import {
   Accordion,
@@ -10,17 +10,18 @@ import {
   StatArrow,
   Text,
 } from '@chakra-ui/react'
+import { Sparklines, SparklinesLine } from 'react-sparklines'
 import type { Props } from '@/types'
 import { formatNum } from '@/lib/formatNum'
 
-const AccordionDetails = dynamic(() => import('@/components/AccordionDetails'))
+const AccordionDetails = dynamic(() => import('@/components/AccordionDetails'), { ssr: false })
 
 const CoinTable: FC<Props> = ({ data }) => {
   return (
     <Accordion variant="striped" allowMultiple>
       {data.map((coin, idx) => (
         <AccordionItem key={idx}>
-          <AccordionButton id={coin.id} minH="4rem" justifyContent="space-between">
+          <AccordionButton minH="4rem" justifyContent="space-between">
             <Text fontSize="2xl" w="5rem" align="center">
               {coin.market_cap_rank}
             </Text>
@@ -37,13 +38,24 @@ const CoinTable: FC<Props> = ({ data }) => {
                 {coin.name + ` (${coin.symbol.toUpperCase()})`}
               </Text>
             </Box>
-            <Text fontSize="xl" align="right" w="12rem">
-              {formatNum(coin.total_volume, 0)}
-            </Text>
-            <Text fontSize="xl" align="right" w="12rem">
-              {formatNum(coin.market_cap, 0)}
-            </Text>
-            <Box d="flex" w="7rem" alignItems="center">
+            <Box w="8rem" mr="4rem">
+              <Text fontSize="xl">{formatNum(coin.current_price, 2, 2, false)}</Text>
+            </Box>
+            <Box d="flex" w="8rem" alignItems="center">
+              <StatArrow
+                mr=".5rem"
+                type={coin.price_change_percentage_1h_in_currency >= 0 ? 'increase' : 'decrease'}
+              />
+              <Text
+                align="right"
+                fontSize="xl"
+                textColor={
+                  coin.price_change_percentage_1h_in_currency > 0 ? 'green.500' : 'red.500'
+                }>
+                {formatNum(coin.price_change_percentage_1h_in_currency, 2, 2, true)}
+              </Text>
+            </Box>
+            <Box d="flex" w="8rem" alignItems="center">
               <StatArrow
                 mr=".5rem"
                 type={coin.price_change_percentage_24h >= 0 ? 'increase' : 'decrease'}
@@ -52,12 +64,56 @@ const CoinTable: FC<Props> = ({ data }) => {
                 align="right"
                 fontSize="xl"
                 textColor={coin.price_change_percentage_24h > 0 ? 'green.500' : 'red.500'}>
-                {coin.price_change_percentage_24h}
+                {formatNum(coin.price_change_percentage_24h, 2, 2, true)}
               </Text>
             </Box>
-            <Text fontSize="xl" w="8rem" mr="2rem" align="right">
-              {formatNum(coin.current_price, 2, 2, false)}
-            </Text>
+            <Box d="flex" w="8rem" alignItems="center">
+              <StatArrow
+                mr=".5rem"
+                type={coin.price_change_percentage_7d_in_currency >= 0 ? 'increase' : 'decrease'}
+              />
+              <Text
+                align="right"
+                fontSize="xl"
+                textColor={
+                  coin.price_change_percentage_7d_in_currency > 0 ? 'green.500' : 'red.500'
+                }>
+                {formatNum(coin.price_change_percentage_7d_in_currency, 2, 2, true)}
+              </Text>
+            </Box>
+            <Box d="flex" w="8rem" alignItems="center">
+              <StatArrow
+                mr=".5rem"
+                type={coin.price_change_percentage_30d_in_currency >= 0 ? 'increase' : 'decrease'}
+              />
+              <Text
+                align="right"
+                fontSize="xl"
+                textColor={
+                  coin.price_change_percentage_30d_in_currency > 0 ? 'green.500' : 'red.500'
+                }>
+                {formatNum(coin.price_change_percentage_30d_in_currency, 2, 2, true)}
+              </Text>
+            </Box>
+            <Box d="flex" w="10rem" alignItems="center">
+              <StatArrow
+                mr=".5rem"
+                type={coin.price_change_percentage_1y_in_currency >= 0 ? 'increase' : 'decrease'}
+              />
+              <Text
+                align="right"
+                fontSize="xl"
+                textColor={
+                  coin.price_change_percentage_1y_in_currency > 0 ? 'green.500' : 'red.500'
+                }>
+                {formatNum(coin.price_change_percentage_1y_in_currency, 2, 2, true)}
+              </Text>
+            </Box>
+            <Box w={250}>
+              <Sparklines data={coin.sparkline_in_7d.price}>
+                <SparklinesLine color="blue" />
+              </Sparklines>
+            </Box>
           </AccordionButton>
           <AccordionDetails {...coin} />
         </AccordionItem>
