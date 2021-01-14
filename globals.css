@@ -1,0 +1,47 @@
+.paginate-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  list-style: none;
+}
+
+.paginate-break {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.paginate-break-link {
+}
+
+.paginate-page {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.paginate-page-link {
+}
+
+.paginate-active {
+  color: red;
+}
+
+.paginate-active-link {
+}
+
+.paginate-previous {
+  margin-right: 1rem;
+}
+
+.paginate-previous-link {
+}
+
+.paginate-next {
+  margin-left: 1rem;
+}
+
+.paginate-next-link {
+}
+
+.paginate-disabled {
+}
