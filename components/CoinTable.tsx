@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import React, { FC, useState } from 'react'
 import dynamic from 'next/dynamic'
 import {
   Accordion,
@@ -12,8 +12,9 @@ import {
 } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { formatNum } from '@/lib/formatNum'
-import type { Props } from '@/types'
 import ReactPaginate from 'react-paginate'
+import TableHeader from '@/components/TableHeader'
+import type { Props } from '@/types'
 
 const AccordionDetails = dynamic(() => import('@/components/AccordionDetails'), { ssr: false })
 const Sparklines = dynamic(() => import('@/components/Sparklines'), {
@@ -28,14 +29,15 @@ const CoinTable: FC<Props> = ({ data }) => {
 
   return (
     <>
+      <TableHeader />
       <Accordion allowToggle>
-        {data.slice(dataStart, dataEnd).map((coin, idx) => {
+        {data.slice(dataStart, dataEnd).map(coin => {
           return (
-            <AccordionItem key={idx}>
+            <AccordionItem key={coin.id}>
               {({ isExpanded }) => (
                 <>
                   <AccordionButton minH="73px" justifyContent="space-between">
-                    <Text fontSize="2xl" w="5rem" align="center">
+                    <Text fontSize="2xl" w="5rem" mr="3rem" align="center">
                       {coin.market_cap_rank}
                     </Text>
                     <Box d="flex" w="22rem" alignItems="center">
@@ -45,7 +47,7 @@ const CoinTable: FC<Props> = ({ data }) => {
                       </Text>
                     </Box>
                     <Box w="8rem" mr="4rem">
-                      <Text fontSize="xl">{formatNum(coin.current_price, 2, 2, false)}</Text>
+                      <Text fontSize="xl">{formatNum(coin.current_price, 5, 2, false)}</Text>
                     </Box>
                     <Box d="flex" w="8rem" alignItems="center">
                       <StatArrow
