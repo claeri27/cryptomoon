@@ -11,12 +11,12 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { formatNum } from '@/lib/formatNum'
+import { formatNum } from '@/lib/formatData'
 import ReactPaginate from 'react-paginate'
 import TableHeader from '@/components/TableHeader'
 import type { Props } from '@/types'
 
-const AccordionDetails = dynamic(() => import('@/components/AccordionDetails'), { ssr: false })
+const AccordionDetails = dynamic(() => import('@/components/CoinDetails'), { ssr: false })
 const Sparklines = dynamic(() => import('@/components/Sparklines'), {
   ssr: false,
   // eslint-disable-next-line react/display-name
@@ -131,7 +131,7 @@ const CoinTable: FC<Props> = ({ data }) => {
                       <Sparklines coin={coin} fill={'none'} />
                     </Box>
                   </AccordionButton>
-                  <AccordionDetails {...coin} sparkline={isExpanded} />
+                  <AccordionDetails {...coin} />
                 </>
               )}
             </AccordionItem>
