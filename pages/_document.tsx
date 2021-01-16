@@ -1,4 +1,6 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
+import { ColorModeScript } from '@chakra-ui/react'
+import theme from '@/theme'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -13,6 +15,7 @@ class MyDocument extends Document {
           <meta name="Cryptomoon" content="Realtime cryptocurrency price tracking" />
         </Head>
         <body>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
         </body>
