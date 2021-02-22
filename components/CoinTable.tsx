@@ -33,7 +33,7 @@ const CoinTable: FC<Props> = ({ data }) => {
     <>
       <TableHeader />
       <Accordion allowToggle>
-        {data.slice(dataStart, dataEnd).map(coin => {
+        {data?.slice(dataStart, dataEnd).map(coin => {
           return (
             <AccordionItem key={coin.id}>
               <>
@@ -137,9 +137,6 @@ const CoinTable: FC<Props> = ({ data }) => {
         })}
       </Accordion>
       <ReactPaginate
-        previousLabel={<ArrowBackIcon />}
-        nextLabel={<ArrowForwardIcon />}
-        breakLabel="..."
         containerClassName="paginate-container"
         breakClassName="paginate-break"
         breakLinkClassName="paginate-break-link"
@@ -152,9 +149,12 @@ const CoinTable: FC<Props> = ({ data }) => {
         nextClassName="paginate-next"
         nextLinkClassName="paginate-next-link"
         disabledClassName="paginate-disabled"
-        pageCount={5}
+        pageCount={15}
         pageRangeDisplayed={4}
         marginPagesDisplayed={1}
+        previousLabel={<ArrowBackIcon />}
+        nextLabel={<ArrowForwardIcon />}
+        breakLabel={'...'}
         onPageChange={({ selected }) => {
           if (selected === 0) {
             setDataStart(0)

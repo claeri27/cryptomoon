@@ -15,7 +15,12 @@ const AppBar: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Flex align="center" h="20" w="100%" bg="blue.500" position="relative">
+    <Flex
+      align="center"
+      h="20"
+      w="100%"
+      bgGradient="linear(to-t, blue.800, blue.600,  blue.400)"
+      position="relative">
       <Heading
         position="absolute"
         left="50%"
