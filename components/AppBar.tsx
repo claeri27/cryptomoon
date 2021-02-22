@@ -9,10 +9,13 @@ import {
   InputLeftElement,
   useColorMode,
 } from '@chakra-ui/react'
+import { useAtom } from 'jotai'
 import { MoonIcon, Search2Icon, SunIcon } from '@chakra-ui/icons'
+import { pageAtom } from '@/atoms'
 
 const AppBar: FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
+  const [, setPage] = useAtom(pageAtom)
 
   return (
     <Flex
@@ -28,7 +31,9 @@ const AppBar: FC = () => {
         transform="translate(-50%,0)"
         d="flex"
         size="2xl"
-        ml="4">
+        ml="4"
+        _hover={{ cursor: 'pointer' }}
+        onClick={() => setPage(1)}>
         CRYPT
         <MoonIcon py=".25rem" />
         MOON

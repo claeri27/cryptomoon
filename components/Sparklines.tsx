@@ -1,8 +1,8 @@
 import { Sparklines as ReactSparklines, SparklinesLine } from 'react-sparklines'
-import type { Data } from '@/types'
+import type { Coin } from '@/types'
 import type { FC } from 'react'
 
-const Sparklines: FC<{ coin: Data; fill?: string }> = ({ coin, fill }) => {
+const Sparklines: FC<{ coin: Coin; fill?: string }> = ({ coin, fill }) => {
   return (
     <ReactSparklines data={coin.sparkline_in_7d.price}>
       <SparklinesLine

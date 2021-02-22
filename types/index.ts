@@ -1,4 +1,4 @@
-export interface Data {
+export interface Coin {
   id: string
   symbol: string
   name: string
@@ -32,8 +32,4 @@ export interface Data {
   sparkline_in_7d: {
     price: number[]
   }
-}
-
-export interface Props {
-  data: Data[]
 }
