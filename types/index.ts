@@ -12,6 +12,10 @@ export interface Data {
   low_24h: number
   price_change_24h: number
   price_change_percentage_24h: number
+  price_change_percentage_1h_in_currency: number
+  price_change_percentage_7d_in_currency: number
+  price_change_percentage_30d_in_currency: number
+  price_change_percentage_1y_in_currency: number
   market_cap_change_24h: number
   market_cap_change_percentage_24h: number
   circulating_supply: number
@@ -25,6 +29,9 @@ export interface Data {
   atl_date: string
   roi: null
   last_updated: string
+  sparkline_in_7d: {
+    price: number[]
+  }
 }
 
 export interface Props {
