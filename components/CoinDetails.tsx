@@ -1,6 +1,6 @@
 import { AccordionPanel, Flex, Img, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
 import React, { FC } from 'react'
-import type { Data } from '@/types'
+import type { Coin } from '@/types'
 import { formatDate, formatNum } from '@/lib/formatData'
 import dynamic from 'next/dynamic'
 
@@ -14,7 +14,7 @@ const Sparklines = dynamic(() => import('@/components/Sparklines'), {
   ),
 })
 
-const CoinDetails: FC<Data> = props => {
+const CoinDetails: FC<Coin> = props => {
   return (
     <AccordionPanel>
       <Flex justify="space-between" align="center" my="1rem">
