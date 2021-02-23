@@ -14,8 +14,12 @@ const TableHeader = () => {
       <Text color="whitesmoke">1HR</Text>
       <Text color="whitesmoke">24HR</Text>
       <Text color="whitesmoke">7D</Text>
-      <Text color="whitesmoke">30D</Text>
-      <Text color="whitesmoke">1YR</Text>
+      <Text display={['none', null, null, null, 'block']} color="whitesmoke">
+        30D
+      </Text>
+      <Text display={['none', null, null, null, 'block']} color="whitesmoke">
+        1YR
+      </Text>
       <Text color="whitesmoke" px="5rem">
         7D
       </Text>

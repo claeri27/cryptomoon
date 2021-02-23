@@ -5,5 +5,6 @@ import { useAtom } from 'jotai'
 
 export function useCoins() {
   const [page] = useAtom(pageAtom)
-  return useQuery(['coins', page.toString()], () => getCoins(page.toString()))
+  const pageStr = page.toString()
+  return useQuery(['coins', pageStr], () => getCoins(pageStr))
 }
