@@ -1,3 +1,5 @@
+// Gonna refactor this
+
 const handleHighNumber = (highNumber: number) => {
   const numString = highNumber.toString()
   const [one, two, three, four, five] = numString.split('')
