@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import dynamic from 'next/dynamic'
 import { useAtom } from 'jotai'
 import {
