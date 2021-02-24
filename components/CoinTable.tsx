@@ -32,11 +32,18 @@ interface PercentageProps {
   type: string
 }
 
-const Percentage: FC<PercentageProps> = ({ change }) => {
+const Percentage: FC<PercentageProps> = ({ change, type }) => {
   return (
-    <Flex align="center" w={['11vw', null, null, '8vw', '8vw']}>
-      <StatArrow mr=".3rem" type={change >= 0 ? 'increase' : 'decrease'} />
-      <Text fontSize={['2xs', 'xs', 'sm', 'md']} textColor={change > 0 ? 'green.400' : 'red.400'}>
+    <Flex
+      align="center"
+      d={[
+        type !== '24h' ? 'none' : 'flex',
+        type === '1y' || type === '30d' ? 'none' : 'flex',
+        'flex',
+      ]}
+      w={['15vw', '15vw', '11vw', '8vw', '8vw']}>
+      <StatArrow mr={['.1rem', '.3rem']} type={change >= 0 ? 'increase' : 'decrease'} />
+      <Text fontSize={['xs', null, 'sm', 'md']} textColor={change > 0 ? 'green.400' : 'red.400'}>
         {formatNum(change, 2, 2, true)}
       </Text>
     </Flex>
@@ -70,27 +77,27 @@ const CoinTable: FC = () => {
                 <>
                   <AccordionButton justifyContent="space-between" p="0" minH="73px">
                     <Flex align="center">
-                      <Box w="5vw">
-                        <Text fontSize={['md', null, 'lg', null, 'xl']}>
+                      <Flex justify="center" w={['8vw', '7vw']}>
+                        <Text fontSize={['sm', null, 'lg', null, 'xl']}>
                           {coin.market_cap_rank}
                         </Text>
-                      </Box>
-                      <Flex align="center" justify="center" w="8vw">
+                      </Flex>
+                      <Flex align="center" justify="center" w={['12vw', '8vw']}>
                         <Img
                           src={coin.image}
                           h={[6, null, 8, null, 10]}
                           w={[6, null, 8, null, 10]}
-                          mr={5}
+                          mr={['none', 5]}
                           alt="icon"
                         />
                       </Flex>
-                      <Flex align="center" w="15vw">
-                        <Text align="left" fontSize={['2xs', 'xs', 'sm', 'md']}>
+                      <Flex align="center" w={['30vw', '13vw', '10vw']}>
+                        <Text align="left" fontSize={['xs', null, 'sm', 'md']}>
                           {coin.name + ` (${coin.symbol.toUpperCase()})`}
                         </Text>
                       </Flex>
-                      <Box w="15vw">
-                        <Text fontSize={['2xs', 'xs', 'sm', 'md']}>
+                      <Box w={['30vw', '25vw', '20vw', '15vw']}>
+                        <Text fontSize={['xs', null, 'sm', 'md']}>
                           {formatNum(coin.current_price, 5, 2, false)}
                         </Text>
                       </Box>

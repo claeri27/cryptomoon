@@ -22,7 +22,7 @@ const Home: FC<{ deyhdratedState: DehydratedState }> = () => (
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['coins', '1'], () => getCoins('1'))
-  return { props: { deyhydratedState: dehydrate(queryClient) }, revalidate: 2 }
+  return { props: { deyhydratedState: dehydrate(queryClient) }, revalidate: 5 }
 }
 
 export default Home
