@@ -1,17 +1,9 @@
-import {
-  AccordionPanel,
-  Flex,
-  FlexProps,
-  Img,
-  SimpleGrid,
-  Spinner,
-  Text,
-  TextProps,
-} from '@chakra-ui/react'
+import { AccordionPanel, Flex, Img, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
 import React, { FC } from 'react'
 import type { Coin } from '@/types'
 import { formatDate, formatNum } from '@/lib/formatData'
 import dynamic from 'next/dynamic'
+import { GridItem, GridItemHeader, GridItemValue } from './components'
 
 const Sparklines = dynamic(() => import('@/components/Sparklines'), {
   ssr: false,
@@ -22,23 +14,6 @@ const Sparklines = dynamic(() => import('@/components/Sparklines'), {
     </Flex>
   ),
 })
-
-const GridItem: FC<FlexProps> = ({ children, ...props }) => (
-  <Flex {...props} direction="column" justify="center" align="center" height="80px">
-    {children}
-  </Flex>
-)
-
-const GridItemHeader: FC<TextProps> = ({ children, ...props }) => (
-  <Text {...props} fontSize={['xs', null, 'sm']}>
-    {children}
-  </Text>
-)
-const GridItemValue: FC<TextProps> = ({ children, ...props }) => (
-  <Text {...props} fontSize={['lg', null, 'xl']}>
-    {children}
-  </Text>
-)
 
 const CoinDetails: FC<Coin> = props => {
   return (
