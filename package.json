@@ -20,6 +20,7 @@
     "next": "10.0.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-feather": "^2.0.9",
     "react-paginate": "^7.0.0",
     "react-query": "^3.9.9",
     "react-sparklines": "^1.7.0"

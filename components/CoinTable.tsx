@@ -6,9 +6,9 @@ import {
   AccordionButton,
   AccordionItem,
   Box,
+  Flex,
   Img,
   Skeleton,
-  Spinner,
   StatArrow,
   Text,
 } from '@chakra-ui/react'
@@ -27,6 +27,39 @@ const Sparklines = dynamic(() => import('@/components/Sparklines'), {
   ),
 })
 
+interface PercentageProps {
+  change: number
+  type: string
+}
+
+const Percentage: FC<PercentageProps> = ({ change, type }) => {
+  return (
+    <Flex
+      align="center"
+      d={[
+        type !== '24h' ? 'none' : 'flex',
+        type === '1y' || type === '30d' ? 'none' : 'flex',
+        'flex',
+      ]}
+      w={['15vw', '15vw', '11vw', '8vw', '8vw']}>
+      <StatArrow mr={['.1rem', '.3rem']} type={change >= 0 ? 'increase' : 'decrease'} />
+      <Text fontSize={['xs', null, 'sm', 'md']} textColor={change > 0 ? 'green.400' : 'red.400'}>
+        {formatNum(change, 2, 2, true)}
+      </Text>
+    </Flex>
+  )
+}
+
+const AccordionLoading: FC = () => (
+  <>
+    {[...Array(50)].map((_, idx) => (
+      <AccordionItem key={idx}>
+        <AccordionButton minH="73px" />
+      </AccordionItem>
+    ))}
+  </>
+)
+
 const CoinTable: FC = () => {
   const [, setPage] = useAtom(pageAtom)
   const coins = useCoins()
@@ -36,112 +69,61 @@ const CoinTable: FC = () => {
       <TableHeader />
       <Accordion allowToggle>
         {coins.isLoading ? (
-          <>
-            {[...Array(50)].map((_, idx) => (
-              <AccordionItem key={idx}>
-                <AccordionButton minH="73px" />
-              </AccordionItem>
-            ))}
-          </>
+          <AccordionLoading />
         ) : (
           coins.data?.map(coin => {
             return (
               <AccordionItem key={coin.id}>
                 <>
-                  <AccordionButton minH="73px" justifyContent="space-between">
-                    <Text fontSize="2xl" w="5rem" mr="3rem" align="center">
-                      {coin.market_cap_rank}
-                    </Text>
-                    <Box d="flex" w="22rem" alignItems="center">
-                      <Img src={coin.image} h={10} w={10} mr={5} alt="icon" />
-                      <Text fontSize="xl" align="left">
-                        {coin.name + ` (${coin.symbol.toUpperCase()})`}
-                      </Text>
-                    </Box>
-                    <Box w="8rem" mr="4rem">
-                      <Text fontSize="xl">{formatNum(coin.current_price, 5, 2, false)}</Text>
-                    </Box>
-                    <Box d="flex" w="8rem" alignItems="center">
-                      <StatArrow
-                        mr=".5rem"
-                        type={
-                          coin.price_change_percentage_1h_in_currency >= 0 ? 'increase' : 'decrease'
-                        }
-                      />
-                      <Text
-                        align="right"
-                        fontSize="xl"
-                        textColor={
-                          coin.price_change_percentage_1h_in_currency > 0 ? 'green.400' : 'red.400'
-                        }>
-                        {formatNum(coin.price_change_percentage_1h_in_currency, 2, 2, true)}
-                      </Text>
-                    </Box>
-                    <Box d="flex" w="8rem" alignItems="center">
-                      <StatArrow
-                        mr=".5rem"
-                        type={coin.price_change_percentage_24h >= 0 ? 'increase' : 'decrease'}
-                      />
-                      <Text
-                        align="right"
-                        fontSize="xl"
-                        textColor={coin.price_change_percentage_24h > 0 ? 'green.400' : 'red.400'}>
-                        {formatNum(coin.price_change_percentage_24h, 2, 2, true)}
-                      </Text>
-                    </Box>
-                    <Box d="flex" w="8rem" alignItems="center">
-                      <StatArrow
-                        mr=".5rem"
-                        type={
-                          coin.price_change_percentage_7d_in_currency >= 0 ? 'increase' : 'decrease'
-                        }
-                      />
-                      <Text
-                        align="right"
-                        fontSize="xl"
-                        textColor={
-                          coin.price_change_percentage_7d_in_currency > 0 ? 'green.400' : 'red.400'
-                        }>
-                        {formatNum(coin.price_change_percentage_7d_in_currency, 2, 2, true)}
-                      </Text>
-                    </Box>
-                    <Box d="flex" w="8rem" alignItems="center">
-                      <StatArrow
-                        mr=".5rem"
-                        type={
-                          coin.price_change_percentage_30d_in_currency >= 0
-                            ? 'increase'
-                            : 'decrease'
-                        }
-                      />
-                      <Text
-                        align="right"
-                        fontSize="xl"
-                        textColor={
-                          coin.price_change_percentage_30d_in_currency > 0 ? 'green.400' : 'red.400'
-                        }>
-                        {formatNum(coin.price_change_percentage_30d_in_currency, 2, 2, true)}
-                      </Text>
-                    </Box>
-                    <Box d="flex" w="10rem" alignItems="center">
-                      <StatArrow
-                        mr=".5rem"
-                        type={
-                          coin.price_change_percentage_1y_in_currency >= 0 ? 'increase' : 'decrease'
-                        }
-                      />
-                      <Text
-                        align="right"
-                        fontSize="xl"
-                        textColor={
-                          coin.price_change_percentage_1y_in_currency > 0 ? 'green.400' : 'red.400'
-                        }>
-                        {formatNum(coin.price_change_percentage_1y_in_currency, 2, 2, true)}
-                      </Text>
-                    </Box>
-                    <Box w={250}>
-                      <Sparklines coin={coin} fill={'none'} />
-                    </Box>
+                  <AccordionButton justifyContent="space-between" p="0" minH="73px">
+                    <Flex align="center">
+                      <Flex justify="center" w={['8vw', '7vw']}>
+                        <Text fontSize={['sm', null, 'lg', null, 'xl']}>
+                          {coin.market_cap_rank}
+                        </Text>
+                      </Flex>
+                      <Flex align="center" justify="center" w={['12vw', '8vw']}>
+                        <Img
+                          src={coin.image}
+                          h={[6, null, 8, null, 10]}
+                          w={[6, null, 8, null, 10]}
+                          mr={['none', 5]}
+                          alt="icon"
+                        />
+                      </Flex>
+                      <Flex align="center" w={['30vw', '13vw', '10vw']}>
+                        <Text align="left" fontSize={['xs', null, 'sm', 'md']}>
+                          {coin.name + ` (${coin.symbol.toUpperCase()})`}
+                        </Text>
+                      </Flex>
+                      <Box w={['30vw', '25vw', '20vw', '15vw']}>
+                        <Text fontSize={['xs', null, 'sm', 'md']}>
+                          {formatNum(coin.current_price, 5, 2, false)}
+                        </Text>
+                      </Box>
+                      <Flex align="center">
+                        <Percentage
+                          type="1h"
+                          change={coin.price_change_percentage_1h_in_currency}
+                        />
+                        <Percentage type="24h" change={coin.price_change_percentage_24h} />
+                        <Percentage
+                          type="7d"
+                          change={coin.price_change_percentage_7d_in_currency}
+                        />
+                        <Percentage
+                          type="30d"
+                          change={coin.price_change_percentage_30d_in_currency}
+                        />
+                        <Percentage
+                          type="1y"
+                          change={coin.price_change_percentage_1y_in_currency}
+                        />
+                      </Flex>
+                      <Flex ml="1rem" d={['none', null, null, 'flex']} w="15vw">
+                        <Sparklines coin={coin} fill={'none'} />
+                      </Flex>
+                    </Flex>
                   </AccordionButton>
                   <AccordionDetails {...coin} />
                 </>
