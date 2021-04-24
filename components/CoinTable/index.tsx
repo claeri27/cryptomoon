@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useAtom } from 'jotai'
 import {
@@ -8,15 +8,16 @@ import {
   Box,
   Flex,
   Img,
+  SimpleGrid,
   Skeleton,
   StatArrow,
   Text,
 } from '@chakra-ui/react'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
-import { formatNum } from '@/lib/formatData'
+import { formatNum } from '@/utils'
 import ReactPaginate from 'react-paginate'
 import TableHeader from '@/components/TableHeader'
-import { pageAtom } from '@/atoms'
+import { coinIdsAtom, pageAtom } from '@/atoms'
 import { useCoins } from '@/hooks'
 
 const AccordionDetails = dynamic(() => import('@/components/CoinDetails'))
@@ -132,6 +133,40 @@ const CoinTable: FC = () => {
           })
         )}
       </Accordion>
+      {/* <SimpleGrid m="1rem" columns={1} spacing=".5rem">
+        {coins.data?.map((coin, i) => (
+          <Flex
+            justify="space-between"
+            align="center"
+            direction="row"
+            minH="80px"
+            bg="tomato"
+            key={i}>
+            <Flex w="100%" align="center">
+              <Text minW="3rem" align="center" fontSize={['lg', null, null, null, 'xl']}>
+                {coin.market_cap_rank}
+              </Text>
+              <Flex minW="3rem" align="center" direction="column">
+                <Img
+                  src={coin.image}
+                  h={[7, null, 8, null, 10]}
+                  w={[7, null, 8, null, 10]}
+                  alt="icon"
+                />
+                <Text align="center" minW="4rem" fontSize={['sm', null, 'sm', 'md']}>
+                  {coin.symbol.toUpperCase()}
+                </Text>
+              </Flex>
+              <Text fontSize={['md', null, 'sm', 'md']}>{coin.name}</Text>
+            </Flex>
+            <Flex mr="1rem" direction="column">
+              <Text align="right" fontSize={['md', null, 'sm', 'md']}>
+                {formatNum(coin.current_price, 5, 2, false)}
+              </Text>
+            </Flex>
+          </Flex>
+        ))}
+      </SimpleGrid> */}
       <ReactPaginate
         containerClassName="paginate-container"
         breakClassName="paginate-break"

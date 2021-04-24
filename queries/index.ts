@@ -6,3 +6,9 @@ export async function getCoins(page: string): Promise<Coin[]> {
   const res = await axios(url)
   return res.data
 }
+
+export async function getTokenData() {
+  const url = `https://dex.binance.org/api/v1/tokens?limit=1000`
+  const res = await axios(url)
+  return res.data
+}

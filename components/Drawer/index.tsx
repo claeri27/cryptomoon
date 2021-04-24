@@ -15,10 +15,11 @@ import {
   IconButton,
 } from '@chakra-ui/react'
 import React from 'react'
+import { FC } from 'react'
 import { Grid, RefreshCw, Home, AlertTriangle, GitHub, Mail } from 'react-feather'
 import { DrawerButton } from './components'
 
-export function Drawer() {
+const Drawer: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
 
@@ -73,3 +74,5 @@ export function Drawer() {
     </>
   )
 }
+
+export default Drawer
