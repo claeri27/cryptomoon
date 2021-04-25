@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useCoin, useProfile } from '@/hooks'
 import {
   Button,
@@ -15,11 +15,16 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import { networkAtom } from '@/atoms'
+import { useAtom } from 'jotai'
 
 const BalanceButton: FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { balance, active, deactivate } = useProfile()
-  const bnb = useCoin('BNB')
+  const [network] = useAtom(networkAtom)
+  const coin = useCoin(network.symbol)
+
+  const balanceAndSymbol = `${balance === '0.0' ? '0' : balance} ${coin?.symbol.toUpperCase()}`
 
   const handleClick = () => {
     deactivate()
@@ -31,18 +36,18 @@ const BalanceButton: FC = () => {
     return (
       <>
         <Button onClick={onOpen} mr="1rem">
-          <Img src={bnb?.image} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
-          {balance ? `${balance} BNB` : <Spinner />}
+          <Img src={coin?.image} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
+          {balance ? balanceAndSymbol : <Spinner />}
         </Button>
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Binance Smart Chain</ModalHeader>
+            <ModalHeader>{network.name}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Flex mb="1rem" align="center" justify="center">
-                <Img src={bnb?.image} h={[12]} w={[12]} mr={['none', 5]} alt="icon" />
-                <Text fontSize="3rem">{`${balance} BNB`}</Text>
+                <Img src={coin?.image} h={[12]} w={[12]} mr={['none', 5]} alt="icon" />
+                <Text fontSize="3rem">{balanceAndSymbol}</Text>
               </Flex>
               <Button
                 mb="1rem"

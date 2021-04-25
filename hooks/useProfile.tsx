@@ -7,7 +7,7 @@ const emptyProfile = {
   active: false,
   shortAccount: '',
   balance: '',
-  activate: () => null,
+  library: '',
   deactivate: () => null,
 }
 
@@ -32,7 +32,7 @@ const useProfile = () => {
     active,
     balance,
     shortAccount,
-    activate,
+    library,
     deactivate,
   }
 }
