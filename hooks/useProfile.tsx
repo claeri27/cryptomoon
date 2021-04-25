@@ -1,13 +1,14 @@
+import { metamask } from '@/utils'
 import { formatEther } from '@ethersproject/units'
 import { useWeb3React } from '@web3-react/core'
 import { useEffect, useState } from 'react'
 
 const emptyProfile = {
   account: '',
-  active: false,
   shortAccount: '',
   balance: '',
   library: '',
+  active: false,
   deactivate: () => null,
 }
 

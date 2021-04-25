@@ -4,7 +4,7 @@ import { useProfile } from '.'
 import { networkAtom } from '@/atoms'
 import { networkList } from '@/utils'
 
-const useNetworkStatus = () => {
+const useNetworkChanged = () => {
   const { active, library } = useProfile()
   const [, setNetwork] = useAtom(networkAtom)
 
@@ -20,4 +20,4 @@ const useNetworkStatus = () => {
   }, [library, active])
 }
 
-export default useNetworkStatus
+export default useNetworkChanged

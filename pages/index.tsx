@@ -5,10 +5,11 @@ import { Box } from '@chakra-ui/react'
 import { dehydrate, DehydratedState } from 'react-query/hydration'
 import { getCoins, getTokenData } from '@/queries'
 import { AppBar, CoinTable } from '@/components'
-import { useNetworkStatus } from '@/hooks'
+import { useLocalStorage, useNetworkChanged } from '@/hooks'
 
 const Home: FC<{ deyhdratedState: DehydratedState }> = () => {
-  useNetworkStatus()
+  useLocalStorage()
+  useNetworkChanged()
 
   return (
     <Box>

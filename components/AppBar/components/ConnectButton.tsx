@@ -9,8 +9,13 @@ const ConnectButton: FC = () => {
   const { active, shortAccount, deactivate } = useProfile()
 
   const handleClick = () => {
-    if (active) deactivate()
-    else activate(metamask)
+    if (active) {
+      localStorage.clear()
+      deactivate()
+    } else {
+      localStorage.setItem('profile', 'yes')
+      activate(metamask)
+    }
   }
 
   return <Button onClick={handleClick}>{active ? shortAccount : 'Connect'}</Button>
