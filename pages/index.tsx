@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { Box } from '@chakra-ui/react'
 import { dehydrate, DehydratedState } from 'react-query/hydration'
-import { getCoins, getTokenData } from '@/queries'
+import { getChartData, getCoins } from '@/queries'
 import { AppBar, CoinTable } from '@/components'
 import { useFetchChartData, useLocalStorage, useNetworkChanged } from '@/hooks'
 
@@ -26,7 +26,7 @@ const Home: React.FC<{ deyhdratedState: DehydratedState }> = () => {
 // export const getStaticProps: GetStaticProps = async () => {
 //   const queryClient = new QueryClient()
 //   await queryClient.prefetchQuery(['coins', '1'], () => getCoins('1'))
-//   await queryClient.prefetchQuery(['tokenData'], getTokenData)
+//   await queryClient.prefetchQuery(['tokenData'], getChartData)
 //   return { props: { deyhydratedState: dehydrate(queryClient) }, revalidate: 5 }
 // }
 

@@ -44,3 +44,92 @@ export interface Token {
   symbol: string
   total_supply: string
 }
+
+export interface GetQuoteData {
+  chainId: string
+  fromTokenAddress: string
+  toTokenAddress: string
+  amount: number
+  fee?: number
+  protocols?: string
+  gasPrice?: string
+  complexityLevel?: string
+  connectorTokens?: string
+  gasLimit?: number
+  parts?: number
+  mainRouteParts?: number
+}
+
+interface Protocol {
+  name: string
+  part: number
+  fromTokenAddress: string
+  toTokenAddress: string
+}
+
+export interface GetQuoteDataResponse {
+  fromToken: {
+    symbol: string
+    name: string
+    address: string
+    decimals: number
+    logoURI: string
+  }
+  toToken: {
+    symbol: string
+    name: string
+    address: string
+    decimals: number
+    logoURI: string
+  }
+  toTokenAmount: string // result amount of toToken in minimal divisible units
+  fromTokenAmount: string // input amount of fromToken in minimal divisible units
+  protocols: Protocol[]
+  estimatedGas: number
+}
+
+export interface GetSwapData {
+  chainId: string
+  fromTokenAddress: string
+  toTokenAddress: string
+  amount: number
+  fromAddress: string
+  slippage: number
+  protocols: string
+  destReceiver: string
+  referrerAddress: string
+  fee: number
+  gasPrice: string
+  burnChi: boolean
+  complexityLevel: string
+  connectorTokens: string
+  allowPartialFill: boolean
+  disableEstimate: boolean
+  gasLimit: number
+  parts: number
+  mainRouteParts: number
+}
+
+interface TokenData {
+  symbol: string
+  name: string
+  decimals: number
+  address: string
+  logoURI: string
+}
+
+export interface GetSwapDataResponse {
+  fromToken: TokenData
+  toToken: TokenData
+  toTokenAmount: string
+  fromTokenAmount: string
+  protocols: Protocol[]
+  tx: {
+    from: string
+    to: string // our contract address
+    data: string
+    value: string // 100 eth
+    gasPrice: string // 23 gwei
+    gas: number // increase this amount by 25%
+  }
+}

@@ -1,5 +1,5 @@
 import { contractAddressesAtom, tokenDataAtom } from '@/atoms'
-import { getTokenData } from '@/queries'
+import { getChartData } from '@/queries'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 
@@ -8,12 +8,12 @@ const useFetchChartData = () => {
 
   useEffect(() => {
     const handleTokenData = async () => {
-      const data = await getTokenData()
+      const data = await getChartData()
       const filteredData = data.filter(token => token.contract_address)
       setTokenData(filteredData)
     }
     if (!tokenData[0]) handleTokenData()
-  }, [tokenData, setTokenData, getTokenData])
+  }, [tokenData, setTokenData, getChartData])
 }
 
 export default useFetchChartData
