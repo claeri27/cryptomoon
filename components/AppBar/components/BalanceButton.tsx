@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useCoin, useProfile } from '@/hooks'
 import {
   Button,
@@ -18,7 +18,7 @@ import {
 import { networkAtom } from '@/atoms'
 import { useAtom } from 'jotai'
 
-const BalanceButton: FC = () => {
+const BalanceButton: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { balance, active, deactivate } = useProfile()
   const [network] = useAtom(networkAtom)

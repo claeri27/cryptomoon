@@ -1,5 +1,4 @@
 import { AccordionPanel, Flex, Img, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
-import React, { FC } from 'react'
 import type { Coin } from '@/types'
 import { formatDate, formatNum } from '@/utils'
 import dynamic from 'next/dynamic'
@@ -15,7 +14,7 @@ const Sparklines = dynamic(() => import('@/components/Sparklines'), {
   ),
 })
 
-const CoinDetails: FC<Coin> = props => {
+const CoinDetails: React.FC<Coin> = props => {
   const {
     image,
     name,

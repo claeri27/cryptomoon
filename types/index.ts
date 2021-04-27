@@ -33,3 +33,14 @@ export interface Coin {
     price: number[]
   }
 }
+
+export interface Token {
+  contract_address: string
+  contract_decimals: number
+  mintable: boolean
+  name: string
+  original_symbol: string
+  owner: string
+  symbol: string
+  total_supply: string
+}

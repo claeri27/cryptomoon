@@ -1,4 +1,3 @@
-import React, { FC, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useAtom } from 'jotai'
 import {
@@ -33,7 +32,7 @@ interface PercentageProps {
   type: string
 }
 
-const Percentage: FC<PercentageProps> = ({ change, type }) => {
+const Percentage: React.FC<PercentageProps> = ({ change, type }) => {
   return (
     <Flex
       align="center"
@@ -51,7 +50,7 @@ const Percentage: FC<PercentageProps> = ({ change, type }) => {
   )
 }
 
-const AccordionLoading: FC = () => (
+const AccordionLoading: React.FC = () => (
   <>
     {[...Array(50)].map((_, idx) => (
       <AccordionItem key={idx}>
@@ -61,7 +60,7 @@ const AccordionLoading: FC = () => (
   </>
 )
 
-const CoinTable: FC = () => {
+const CoinTable: React.FC = () => {
   const [, setPage] = useAtom(pageAtom)
   const coins = useCoins()
 

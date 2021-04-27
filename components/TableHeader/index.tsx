@@ -1,4 +1,3 @@
-import React, { FC } from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { useScreenSize } from '@/hooks'
 
@@ -8,7 +7,7 @@ const HeaderText = ({ children, ...props }) => (
   </Text>
 )
 
-const TableHeader: FC = () => {
+const TableHeader: React.FC = () => {
   const screenSize = useScreenSize()
   return (
     <Flex py=".5rem" bg="gray.800" cursor="default">

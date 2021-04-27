@@ -2,9 +2,8 @@ import { pageAtom } from '@/atoms'
 import { MoonIcon } from '@chakra-ui/icons'
 import { Heading } from '@chakra-ui/react'
 import { useAtom } from 'jotai'
-import React, { FC } from 'react'
 
-const Header: FC = () => {
+const Header: React.FC = () => {
   const [, setPage] = useAtom(pageAtom)
 
   return (

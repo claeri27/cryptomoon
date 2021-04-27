@@ -1,14 +1,15 @@
-import React, { FC } from 'react'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { Box } from '@chakra-ui/react'
 import { dehydrate, DehydratedState } from 'react-query/hydration'
 import { getCoins, getTokenData } from '@/queries'
 import { AppBar, CoinTable } from '@/components'
-import { useLocalStorage, useNetworkChanged } from '@/hooks'
+import { useFetchTokenData, useLocalStorage, useNetworkChanged, useNetworkConnected } from '@/hooks'
 
-const Home: FC<{ deyhdratedState: DehydratedState }> = () => {
+const Home: React.FC<{ deyhdratedState: DehydratedState }> = () => {
   useLocalStorage()
+  useFetchTokenData()
+  // useNetworkConnected()
   useNetworkChanged()
 
   return (

@@ -6,7 +6,7 @@ const useLocalStorage = () => {
   const { activate } = useWeb3React()
 
   useEffect(() => {
-    const publicAddress = localStorage.getItem('profile')
+    const publicAddress = localStorage.getItem('network')
     if (publicAddress) activate(metamask)
   }, [activate, metamask])
 }

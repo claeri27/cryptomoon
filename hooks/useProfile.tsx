@@ -8,12 +8,13 @@ const emptyProfile = {
   shortAccount: '',
   balance: '',
   library: '',
+  chainId: '',
   active: false,
   deactivate: () => null,
 }
 
 const useProfile = () => {
-  const { account, active, library, activate, deactivate } = useWeb3React()
+  const { account, active, library, chainId, activate, deactivate } = useWeb3React()
   const [balance, setBalance] = useState('')
 
   const shortAccount = account?.substr(0, 4) + '...' + account?.substr(account?.length - 4, 4)
@@ -32,6 +33,7 @@ const useProfile = () => {
     account,
     active,
     balance,
+    chainId,
     shortAccount,
     library,
     deactivate,

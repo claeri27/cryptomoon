@@ -1,9 +1,8 @@
-import React, { FC } from 'react'
 import { Flex } from '@chakra-ui/react'
 import { BalanceButton, ConnectButton, Header } from './components'
 import Drawer from '../Drawer'
 
-const AppBar: FC = () => {
+const AppBar: React.FC = () => {
   return (
     <Flex
       align="center"

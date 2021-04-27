@@ -2,22 +2,38 @@ import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 import { useProfile } from '.'
 import { networkAtom } from '@/atoms'
-import { networkList } from '@/utils'
+import { networks } from '@/utils'
+import { useWeb3React } from '@web3-react/core'
 
 const useNetworkChanged = () => {
-  const { active, library } = useProfile()
+  const { chainId } = useProfile()
   const [, setNetwork] = useAtom(networkAtom)
 
   useEffect(() => {
-    if (active) {
-      library.provider.on('chainChanged', chainId => {
-        const chainIdNumber = chainId.substr(2, chainId.length)
-        Object.keys(networkList).map(key => {
-          if (chainIdNumber === key) setNetwork(networkList[key])
+    if (typeof chainId === 'number') {
+      for (let i = 0; i < networks.length; i++) {
+        networks[i].chainId.map(chnId => {
+          if (chnId === chainId.toString()) setNetwork(networks[i])
         })
-      })
+      }
     }
-  }, [library, active])
+  }, [chainId])
+
+  // useEffect(() => {
+  //   if (active) {
+  //     library.provider.on('chainChanged', (chainId: string) => {
+  //       const chainIdNumber = chainId.substr(2, chainId.length)
+  //       for (let i = 0; i < networks.length; i++) {
+  //         networks[i].chainId.map(chnId => {
+  //           if (chnId == chainIdNumber) setNetwork(networks[i])
+  //         })
+  //       }
+  //       // Object.keys(networkList).map(key => {
+  //       //   if (chainIdNumber === key) setNetwork(networkList[key])
+  //       // })
+  //     })
+  //   }
+  // }, [library, active])
 }
 
 export default useNetworkChanged
