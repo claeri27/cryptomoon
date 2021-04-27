@@ -1,17 +1,5 @@
+import { GetApproveCallData, GetApproveCallDataResponse } from '@/types'
 import axios from 'axios'
-
-interface GetApproveCallData {
-  chainId: string
-  tokenAddress: string
-  amount?: string
-}
-
-interface GetApproveCallDataResponse {
-  to: string[]
-  value: string
-  gasPrice: string
-  data: string
-}
 
 const getApproveCallData = async ({
   chainId,

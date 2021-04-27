@@ -45,6 +45,19 @@ export interface Token {
   total_supply: string
 }
 
+export interface GetApproveCallData {
+  chainId: string
+  tokenAddress: string
+  amount?: string
+}
+
+export interface GetApproveCallDataResponse {
+  to: string[]
+  value: string
+  gasPrice: string
+  data: string
+}
+
 export interface GetQuoteData {
   chainId: string
   fromTokenAddress: string

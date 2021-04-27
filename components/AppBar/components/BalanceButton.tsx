@@ -17,10 +17,12 @@ import {
 } from '@chakra-ui/react'
 import { networkAtom } from '@/atoms'
 import { useAtom } from 'jotai'
+import { useWeb3React } from '@web3-react/core'
 
 const BalanceButton: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { balance, active, deactivate } = useProfile()
+  const { balance, active } = useProfile()
+  const { deactivate } = useWeb3React()
   const [network] = useAtom(networkAtom)
   const coin = useCoin(network.symbol)
 

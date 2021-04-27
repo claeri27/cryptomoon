@@ -18,7 +18,7 @@ export const pageAtom = atom<number>(1)
 export const tokenDataAtom = atom<Token[]>([])
 export const contractAddressesAtom = atom<ContractAddressesAtom[]>([])
 export const networkAtom = atom<NetworkAtom>({
-  name: '',
-  symbol: '',
+  name: '...',
+  symbol: '...',
   chainId: [],
 })

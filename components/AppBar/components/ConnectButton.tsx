@@ -5,8 +5,8 @@ import { useWeb3React } from '@web3-react/core'
 import React, { useEffect } from 'react'
 
 const ConnectButton: React.FC = () => {
-  const { activate } = useWeb3React()
-  const { active, shortAccount, deactivate } = useProfile()
+  const { activate, deactivate } = useWeb3React()
+  const { active, shortAccount } = useProfile()
 
   const handleClick = () => {
     if (active) {
