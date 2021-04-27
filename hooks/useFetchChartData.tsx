@@ -3,7 +3,7 @@ import { getTokenData } from '@/queries'
 import { useAtom } from 'jotai'
 import { useEffect } from 'react'
 
-const useFetchTokenData = () => {
+const useFetchChartData = () => {
   const [tokenData, setTokenData] = useAtom(tokenDataAtom)
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const useFetchTokenData = () => {
   }, [tokenData, setTokenData, getTokenData])
 }
 
-export default useFetchTokenData
+export default useFetchChartData
