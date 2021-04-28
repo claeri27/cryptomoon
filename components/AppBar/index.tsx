@@ -1,8 +1,13 @@
 import { Flex } from '@chakra-ui/react'
 import { BalanceButton, ConnectButton, Header } from './components'
 import Drawer from '../Drawer'
+import { useLocalStorage, useNetworkChanged, useHandleWeb3Errors } from '@/hooks'
 
 const AppBar: React.FC = () => {
+  useLocalStorage()
+  useNetworkChanged()
+  useHandleWeb3Errors()
+
   return (
     <Flex
       align="center"

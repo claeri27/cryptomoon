@@ -14,7 +14,8 @@ import {
   Icon,
   IconButton,
 } from '@chakra-ui/react'
-import { Grid, RefreshCw, Home, AlertTriangle, GitHub, Mail } from 'react-feather'
+import Link from 'next/link'
+import { Grid, RefreshCw, Home, BarChart2, GitHub, Mail, Gift, Send } from 'react-feather'
 import { DrawerButton } from './components'
 
 const Drawer: React.FC = () => {
@@ -40,9 +41,11 @@ const Drawer: React.FC = () => {
               <Text fontSize="lg">DASHBOARD</Text>
             </Flex>
             <DrawerBody p="0" borderBottomWidth="1px">
-              <DrawerButton name="Swap" icon={RefreshCw} />
-              <DrawerButton name="Lunar Farms" icon={Home} />
-              <DrawerButton name="Yieldwatch" icon={AlertTriangle} />
+              <DrawerButton name="Home" href="/" icon={Home} />
+              <DrawerButton name="Swap" href="/swap" icon={RefreshCw} />
+              <DrawerButton name="Charts" href="/charts" icon={BarChart2} />
+              <DrawerButton name="Contact" href="/contact" icon={Mail} />
+              <DrawerButton name="Donate" href="/donate" icon={Gift} />
             </DrawerBody>
             <Flex justify="space-evenly" align="center" h="6rem">
               <Button
@@ -64,7 +67,7 @@ const Drawer: React.FC = () => {
                   (window.location.href = 'https://www.github.com/claeri27/cryptomoon')
                 }
               />
-              <IconButton w="20%" h="4rem" aria-label="Contact me by email" icon={<Mail />} />
+              <IconButton w="20%" h="4rem" aria-label="Contact me by email" icon={<Send />} />
             </Flex>
           </DrawerContent>
         </DrawerOverlay>
