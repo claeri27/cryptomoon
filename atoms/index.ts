@@ -5,7 +5,16 @@ interface NetworkAtom {
   name: string
   symbol: string
   url: string
-  chainId: string[]
+  chainIdNumber: string[]
+  chainId: string
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string
+    decimals: number
+  }
+  rpcUrls: string[]
+  blockExplorerUrls: string[]
 }
 
 interface ContractAddressesAtom {
@@ -24,11 +33,21 @@ export const coinPriceAtom = atom<{ [x: string]: string }>({})
 export const coinIdsAtom = atom<string[]>([])
 export const pageAtom = atom<number>(1)
 export const tokenDataAtom = atom<Token[]>([])
+export const loadingAtom = atom(false)
 export const contractAddressesAtom = atom<ContractAddressesAtom[]>([])
 export const networkFormDataAtom = atom(unchangedNetworkFormData)
 export const networkAtom = atom<NetworkAtom>({
   name: '',
   symbol: '',
   url: '',
-  chainId: [],
+  chainId: '',
+  chainIdNumber: [],
+  chainName: '',
+  nativeCurrency: {
+    name: '',
+    symbol: '',
+    decimals: 18,
+  },
+  rpcUrls: [],
+  blockExplorerUrls: [],
 })

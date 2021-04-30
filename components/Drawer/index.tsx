@@ -27,7 +27,7 @@ const Drawer: React.FC = () => {
       <IconButton
         mx="1rem"
         aria-label="Open sidebar"
-        variant="outline"
+        _focus={{ boxShadow: 'none' }}
         onClick={onOpen}
         icon={<Grid />}
       />

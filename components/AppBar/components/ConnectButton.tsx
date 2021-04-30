@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { NetworkMenuList, NetworkRadio } from '.'
 import { useProfile } from '@/hooks'
-import { networkAtom, networkFormDataAtom, unchangedNetworkFormData } from '@/atoms'
+import { loadingAtom, networkAtom, networkFormDataAtom, unchangedNetworkFormData } from '@/atoms'
 import { useAtom } from 'jotai'
 import {
   Button,
@@ -18,18 +18,7 @@ import {
   useRadioGroup,
   Spinner,
 } from '@chakra-ui/react'
-import {
-  handleNetwork,
-  metamask,
-  setupAvalancheNetwork,
-  setupBnBNetwork,
-  setupDaiNetwork,
-  setupEthNetwork,
-  setupFantomNetwork,
-  setupHarmonyNetwork,
-  setupHuobiNetwork,
-  setupMaticNetwork,
-} from '@/utils'
+import { handleNetwork, metamask, setupNetwork } from '@/utils'
 
 const ConnectButton: React.FC = () => {
   const { activate, deactivate, account } = useWeb3React()
@@ -38,36 +27,17 @@ const ConnectButton: React.FC = () => {
   const { getRootProps } = useRadioGroup()
   const [network, setNetwork] = useAtom(networkAtom)
   const [networkFormData, setNetworkFormData] = useAtom(networkFormDataAtom)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useAtom(loadingAtom)
 
   const handleNetworkSetup = useCallback(async () => {
-    switch (networkFormData.name) {
-      case 'Ethereum':
-        return await setupEthNetwork()
-      case 'BSC':
-        return await setupBnBNetwork()
-      case 'Matic':
-        return await setupMaticNetwork()
-      case 'xDai':
-        return await setupDaiNetwork()
-      case 'Harmony':
-        return await setupHarmonyNetwork()
-      case 'Avalanche':
-        return await setupAvalancheNetwork()
-      case 'HECO':
-        return await setupHuobiNetwork()
-      case 'Fantom':
-        return await setupFantomNetwork()
-      default:
-        break
-    }
-  }, [networkFormData.name])
+    return await setupNetwork(networkFormData.symbol)
+  }, [networkFormData.symbol, setupNetwork])
 
-  const handleLoading = async () => {
+  const handleLoading = useCallback(async () => {
     setLoading(true)
-    await new Promise(resolve => setTimeout(resolve, 800))
+    await new Promise(resolve => setTimeout(resolve, 1000))
     setLoading(false)
-  }
+  }, [setLoading])
 
   const handleConnect = useCallback(async () => {
     if (networkFormData.name !== 'Ethereum') {
@@ -114,7 +84,9 @@ const ConnectButton: React.FC = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>{handleButtonText()}</Button>
+      <Button _focus={{ boxShadow: 'none' }} onClick={onOpen}>
+        {handleButtonText()}
+      </Button>
       <Modal isCentered isOpen={isOpen} onClose={handleModalClose}>
         <ModalOverlay />
         <ModalContent>

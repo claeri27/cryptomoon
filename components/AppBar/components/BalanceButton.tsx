@@ -15,7 +15,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { networkAtom } from '@/atoms'
+import { loadingAtom, networkAtom } from '@/atoms'
 import { useAtom } from 'jotai'
 import { useWeb3React } from '@web3-react/core'
 
@@ -24,6 +24,7 @@ const BalanceButton: React.FC = () => {
   const { balance, active } = useProfile()
   const { deactivate } = useWeb3React()
   const [network] = useAtom(networkAtom)
+  const [loading] = useAtom(loadingAtom)
 
   const balanceAndSymbol = `${balance === '0.0' ? '0' : balance} ${network.symbol.toUpperCase()}`
 
@@ -36,16 +37,12 @@ const BalanceButton: React.FC = () => {
   else
     return (
       <>
-        <Button onClick={onOpen} mr="1rem">
-          {network.url ? (
-            <>
-              <Img src={network.url} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
-              {balance ? balanceAndSymbol : <Spinner />}
-            </>
-          ) : (
-            <Spinner />
-          )}
-        </Button>
+        {!loading && network.url && balance && (
+          <Button onClick={onOpen} mr="1rem">
+            <Img src={network.url} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
+            {balanceAndSymbol}
+          </Button>
+        )}
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>

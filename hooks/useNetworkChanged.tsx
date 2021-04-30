@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { networkAtom } from '@/atoms'
 import { networks } from '@/utils'
 import { useProfile } from '.'
+import { useWeb3React } from '@web3-react/core'
 
 const useNetworkChanged = () => {
   const { chainId } = useProfile()
@@ -12,7 +13,7 @@ const useNetworkChanged = () => {
     const handleNetworkChange = async () => {
       if (typeof chainId === 'number') {
         for (let i = 0; i < networks.length; i++) {
-          networks[i].chainId.map(chnId => {
+          networks[i].chainIdNumber.map(chnId => {
             if (chnId === chainId.toString()) setNetwork(networks[i])
           })
         }
