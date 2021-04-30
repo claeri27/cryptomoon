@@ -41,4 +41,10 @@ export const networks = [
     symbol: 'ht',
     url: '/huobilogo.png',
   },
+  {
+    name: 'Fantom',
+    chainId: ['250'],
+    symbol: 'ftm',
+    url: '/fantomlogo.png',
+  },
 ]

@@ -117,6 +117,18 @@ const NetworkMenuList: React.FC = () => {
             }))
           }}
         />
+        <NetworkItem
+          name="Fantom"
+          url={handleNetwork('ftm').url}
+          onClick={() => {
+            setNetworkFormData(data => ({
+              ...data,
+              name: 'Fantom',
+              symbol: 'ftm',
+              changed: true,
+            }))
+          }}
+        />
       </MenuList>
     </>
   )

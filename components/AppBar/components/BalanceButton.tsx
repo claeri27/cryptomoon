@@ -40,7 +40,7 @@ const BalanceButton: React.FC = () => {
           {network.url ? (
             <>
               <Img src={network.url} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
-              {balanceAndSymbol}
+              {balance ? balanceAndSymbol : <Spinner />}
             </>
           ) : (
             <Spinner />

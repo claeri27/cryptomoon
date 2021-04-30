@@ -190,3 +190,29 @@ export const setupHuobiNetwork = async () => {
     return false
   }
 }
+
+export const setupFantomNetwork = async () => {
+  try {
+    const provider = (window as WindowChain).ethereum
+    await provider.request({
+      method: 'wallet_addEthereumChain',
+      params: [
+        {
+          chainId: '0xfa',
+          chainName: 'Fantom Mainnet',
+          nativeCurrency: {
+            name: 'FTM',
+            symbol: 'ftm',
+            decimals: 18,
+          },
+          rpcUrls: ['https://rpcapi.fantom.network'],
+          blockExplorerUrls: ['https://ftmscan.com'],
+        },
+      ],
+    })
+    return true
+  } catch (e) {
+    console.error('FANTOM ERROR: ', e)
+    return false
+  }
+}

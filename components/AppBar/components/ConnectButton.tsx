@@ -25,6 +25,7 @@ import {
   setupBnBNetwork,
   setupDaiNetwork,
   setupEthNetwork,
+  setupFantomNetwork,
   setupHarmonyNetwork,
   setupHuobiNetwork,
   setupMaticNetwork,
@@ -55,6 +56,8 @@ const ConnectButton: React.FC = () => {
         return await setupAvalancheNetwork()
       case 'HECO':
         return await setupHuobiNetwork()
+      case 'Fantom':
+        return await setupFantomNetwork()
       default:
         break
     }
