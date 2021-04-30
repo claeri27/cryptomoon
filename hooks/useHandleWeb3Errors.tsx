@@ -5,7 +5,7 @@ const useHandleWeb3Errors = () => {
   const { error } = useWeb3React()
 
   useEffect(() => {
-    if (error) console.log('WEB3 ERROR: ', error)
+    if (error) console.log('WEB3 ERROR: ', error.message)
   }, [error])
 }
 

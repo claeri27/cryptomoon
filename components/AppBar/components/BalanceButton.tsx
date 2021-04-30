@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useCoin, useProfile } from '@/hooks'
 import {
   Button,
@@ -24,22 +24,27 @@ const BalanceButton: React.FC = () => {
   const { balance, active } = useProfile()
   const { deactivate } = useWeb3React()
   const [network] = useAtom(networkAtom)
-  const coin = useCoin(network.symbol)
 
-  const balanceAndSymbol = `${balance === '0.0' ? '0' : balance} ${coin?.symbol.toUpperCase()}`
+  const balanceAndSymbol = `${balance === '0.0' ? '0' : balance} ${network.symbol.toUpperCase()}`
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     deactivate()
     onClose()
-  }
+  }, [deactivate, onClose])
 
   if (!active) return null
   else
     return (
       <>
         <Button onClick={onOpen} mr="1rem">
-          <Img src={coin?.image} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
-          {balance ? balanceAndSymbol : <Spinner />}
+          {network.url ? (
+            <>
+              <Img src={network.url} h={[6]} w={[6]} mr={['none', 2]} alt="icon" />
+              {balanceAndSymbol}
+            </>
+          ) : (
+            <Spinner />
+          )}
         </Button>
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -48,7 +53,7 @@ const BalanceButton: React.FC = () => {
             <ModalCloseButton />
             <ModalBody>
               <Flex mb="1rem" align="center" justify="center">
-                <Img src={coin?.image} h={[12]} w={[12]} mr={['none', 5]} alt="icon" />
+                <Img src={network?.url} h={[12]} w={[12]} mr={['none', 5]} alt="icon" />
                 <Text fontSize="3rem">{balanceAndSymbol}</Text>
               </Flex>
               <Button

@@ -9,13 +9,16 @@ const useNetworkChanged = () => {
   const [, setNetwork] = useAtom(networkAtom)
 
   useEffect(() => {
-    if (typeof chainId === 'number') {
-      for (let i = 0; i < networks.length; i++) {
-        networks[i].chainId.map(chnId => {
-          if (chnId === chainId.toString()) setNetwork(networks[i])
-        })
+    const handleNetworkChange = async () => {
+      if (typeof chainId === 'number') {
+        for (let i = 0; i < networks.length; i++) {
+          networks[i].chainId.map(chnId => {
+            if (chnId === chainId.toString()) setNetwork(networks[i])
+          })
+        }
       }
     }
+    handleNetworkChange()
   }, [chainId])
 }
 
